@@ -1,4 +1,3 @@
-#import pandas as pd
 import random
 import csv
 from datetime import datetime
@@ -7,7 +6,6 @@ total_attempts = 10000 # Set number of games to play
 board_size = 8 # Set size of board
 start_position = [0,0] # Set start position
 tour_type = "random" # Choose type of tour to take
-#board = pd.DataFrame(data={i:[0]*board_size for i in list(range(0,board_size))})
 
 def valid_moves(position):
     x = [[position[0]-1,position[1]-2],
@@ -32,7 +30,7 @@ def random_tour(position):
         position = random.choice(valid_moves(position))
 
 headers = [["Attempt", "Num_Moves", "Progress", "Moves"]]
-timestamp = "".join(str(x) for x in str(datetime.now().time()) if x not in (":","."))
+timestamp = "".join(str(x) for x in str(datetime.now().strftime("%Y%m%d%H%M%S")))
 filename = "tour_{}_size{}_{}.csv".format(timestamp, board_size, tour_type)
 with open(filename, "w") as file:
     writer = csv.writer(file)
